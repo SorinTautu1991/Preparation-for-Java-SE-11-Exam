@@ -1,6 +1,7 @@
 package labs.pm.data;
 
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class ProductManager {
     /* Constructor */
     public ProductManager(Locale locale) {
         this.locale = locale;
-        resources = ResourceBundle.getBundle("labs.pm.data.resources", locale);
+        resources = ResourceBundle.getBundle("resources", locale);
         dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).localizedBy(locale);
         moneyFormat = NumberFormat.getCurrencyInstance(locale);
     }
@@ -42,5 +43,23 @@ public class ProductManager {
         review = new Review(rating, comments);
         this.product = product.applyRating(rating);
         return this.product;
+    }
+
+    public void printProductReport(){
+        StringBuilder txt = new StringBuilder();
+        txt.append(MessageFormat.format(resources.getString("product"),
+                product.getName(),
+                moneyFormat.format(product.getPrice()),
+                product.getRating().getStars(),
+                dateFormat.format(product.getBestBefore())));
+        txt.append(" ");
+        if(review != null){
+            txt.append(MessageFormat.format(resources.getString("review"),
+                    review.getRating().getStars(),
+                    review.getComments()));
+        } else {
+            txt.append(resources.getString("no.reviews"));
+        }
+        System.out.println(txt);
     }
 }
