@@ -1,6 +1,6 @@
 package labs.pm.data;
 
-public class Review {
+public class Review implements Comparable<Review> {
 
     /* Fields */
     private Rating rating;
@@ -23,5 +23,10 @@ public class Review {
     @Override
     public String toString() {
         return "Rating= " + rating + ", comment= " + comments;
+    }
+
+    @Override
+    public int compareTo(Review other) {
+        return other.getRating().ordinal() - this.rating.ordinal();
     }
 }
