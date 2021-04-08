@@ -35,15 +35,16 @@ public class Shop {
         pm.reviewProduct(p3, Rating.ONE_STAR, "Disgusting cookie");
 //        pm.printProductReport(103);
 
-        pm.printProducts((prodOne, prodTwo) -> prodOne.getRating().ordinal() - prodTwo.getRating().ordinal());
-        pm.printProducts((prodOne, prodTwo) -> prodOne.getPrice().compareTo(prodTwo.getPrice()));
+//        pm.printProducts((prodOne, prodTwo) -> prodOne.getRating().ordinal() - prodTwo.getRating().ordinal());
+//        pm.printProducts((prodOne, prodTwo) -> prodOne.getPrice().compareTo(prodTwo.getPrice()));
         Comparator<Product> ratingSorter = (prodOne, prodTwo) -> prodTwo.getRating().ordinal() - prodOne.getRating().ordinal();
-        pm.printProducts(ratingSorter);
+        pm.printProducts(p -> p.getPrice().floatValue() < 2, ratingSorter);
         Comparator<Product> priceSorter = (prodOne, prodTwo) -> prodTwo.getPrice().compareTo(prodOne.getPrice());
-        pm.printProducts(priceSorter);
+//        pm.printProducts(priceSorter);
 //        I can also combine them together
-        pm.printProducts(ratingSorter.thenComparing(priceSorter));
-        pm.printProducts(ratingSorter.thenComparing(priceSorter.reversed()));
+//        pm.printProducts(ratingSorter.thenComparing(priceSorter));
+//        pm.printProducts(ratingSorter.thenComparing(priceSorter.reversed()));
+        pm.getDiscounts().forEach((rating, discount) -> System.out.println(rating + "\t" + discount));
     }
 
 }
