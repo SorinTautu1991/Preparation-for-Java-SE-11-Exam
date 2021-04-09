@@ -12,16 +12,26 @@ import java.util.Comparator;
 public class Shop {
     public static void main( String[] args ) {
 
-        ProductManager pm = new ProductManager("uk-GB");
-        Product p1 = pm.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
-
-        pm.printProductReport(p1);
-        pm.reviewProduct(p1, Rating.FIVE_STAR, "Nice, hot, cup of tea");
-        pm.reviewProduct(p1, Rating.ONE_STAR, "Horrible tea!!!");
-        pm.reviewProduct(p1, Rating.FOUR_STAR, "Good cup of tea!");
-        pm.reviewProduct(p1, Rating.FIVE_STAR, "Very good tea!");
-        pm.reviewProduct(p1, Rating.FIVE_STAR, "Amazing tea!");
+        ProductManager pm = new ProductManager("en-GB");
+//        Product p1 = pm.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
 //        pm.printProductReport(p1);
+
+//        Creating product using the parseProduct method
+        pm.parseProduct("D, 101, Tea, 1.99, 0, 2019-09-19");
+        pm.parseReview("101, 4, Nice hot cup of tea");
+        pm.parseReview("101, 2, Weak tea");
+        pm.parseReview("101, 3, Acceptable tea");
+        pm.parseReview("101, 1, Horror tea");
+//        pm.printProductReport(p1);
+//        pm.reviewProduct(p1, Rating.FIVE_STAR, "Nice, hot, cup of tea");
+//        pm.reviewProduct(p1, Rating.ONE_STAR, "Horrible tea!!!");
+//        pm.reviewProduct(p1, Rating.FOUR_STAR, "Good cup of tea!");
+//        pm.reviewProduct(p1, Rating.FIVE_STAR, "Very good tea!");
+//        pm.reviewProduct(p1, Rating.FIVE_STAR, "Amazing tea!");
+        pm.printProductReport(101);
+
+//        Generating an error
+//        pm.parseProduct("F, 103, Cake, 3.99, 0, 2019-09-49");
 
         Product p2 = pm.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
         p2 = pm.reviewProduct(p2, Rating.THREE_STAR, "Cofee was ok");
